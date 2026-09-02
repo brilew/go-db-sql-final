@@ -159,7 +159,7 @@ func TestGetByClient(t *testing.T) {
 	require.NoError(t, err)
 	// убедитесь, что количество полученных посылок совпадает с количеством добавленных
 	assert.Equal(t, len(parcels), len(storedParcels))
-	// check
+	// check it out
 	for _, parcel := range storedParcels {
 		// в parcelMap лежат добавленные посылки, ключ - идентификатор посылки, значение - сама посылка
 		// убедитесь, что все посылки из storedParcels есть в parcelMap

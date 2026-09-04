@@ -42,7 +42,7 @@ func TestAddGetDelete(t *testing.T) {
 	// добавьте новую посылку в БД, убедитесь в отсутствии ошибки и наличии идентификатора
 	number, err := store.Add(parcel)
 	require.NoError(t, err)
-	require.NotEmpty(t, number)
+
 	require.Greater(t, number, 0)
 	// get
 	// получите только что добавленную посылку, убедитесь в отсутствии ошибки
@@ -72,12 +72,7 @@ func TestSetAddress(t *testing.T) {
 	store := NewParcelStore(db)
 	// add
 	// добавьте новую посылку в БД, убедитесь в отсутствии ошибки и наличии идентификатора
-	parcel := Parcel{
-		Client:    4567,
-		Status:    ParcelStatusRegistered,
-		Address:   "Yamaica, Vellington, mitsubici 13-22",
-		CreatedAt: time.Now().UTC().Format(time.RFC3339),
-	}
+	parcel := getTestParcel()
 	number, err := store.Add(parcel)
 	require.NoError(t, err)
 	require.NotZero(t, number)
@@ -158,7 +153,7 @@ func TestGetByClient(t *testing.T) {
 	// убедитесь в отсутствии ошибки
 	require.NoError(t, err)
 	// убедитесь, что количество полученных посылок совпадает с количеством добавленных
-	assert.Equal(t, len(parcels), len(storedParcels))
+	assert.Len(t, parcels, len(storedParcels))
 	// check it out
 	for _, parcel := range storedParcels {
 		// в parcelMap лежат добавленные посылки, ключ - идентификатор посылки, значение - сама посылка

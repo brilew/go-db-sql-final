@@ -101,11 +101,11 @@ func main() {
 	// настройте подключение к БД
 	db, err := sql.Open("sqlite", "tracker.db")
 	if err != nil {
-		log.Print("ошибка подключения к базе данных")
+		log.Print(err)
 		return
 	}
 	defer db.Close()
-	store := NewParcelStore(db) // создайте объект ParcelStore функцией NewParcelStore
+	store := NewParcelStore(db)
 	service := NewParcelService(store)
 
 	// регистрация посылки
